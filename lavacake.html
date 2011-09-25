@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US"> 
+<!--
+  Copied and modified from the Facebook Recipe Box sample.
+  http://developers.facebook.com/docs/samples/
+  
+  Replace these variables:
+  YOUR_APP_ID
+  YOUR_NAMESPACE
+  YOUR_URL
+-->
+<head prefix="og: http://ogp.me/ns# YOUR_NAMESPACE: http://ogp.me/ns/apps/YOUR_NAMESPACE#"> 
+	<meta property="fb:app_id" content="YOUR_APP_ID" /> 
+ 	<meta property="og:type" content="YOUR_NAMESPACE:recipe" /> 
+ 	<meta property="og:title" content="Molten Lava Cake" /> 
+ 	<meta property="og:image" content="YOUR_URL/lavacake.jpg" /> 
+ 	<meta property="og:description" content="Sinfully delicious Chocolate Cake" /> 
+ 	<meta property="og:url" content="YOUR_URL/lavacake.html"> 
+	
+	<script type="text/javascript">
+  	function postCook()
+  	{
+  		FB.api('/me/YOUR_NAMESPACE:cook&recipe=YOUR_URL/lavacake.html','post',  function(response) {
+  			if (!response || response.error) {
+  			    alert('Error occured');
+  			  } else {
+  			    alert('Post was successful! Action ID: ' + response.id);
+  			  }
+  		});
+  	}
+	</script>
+</head> 
+
+<body> 
+	<div id="fb-root"></div>
+	<script src="http://connect.facebook.net/en_US/all.js"></script>
+	<script>
+		FB.init({ 
+   			appId:'YOUR_APP_ID', cookie:true, 
+       		        status:true, xfbml:true, oauth:true
+   		});
+		</script>
+		<h2 style="font: bold 25px verdana;color:grey;">Molten Lava Cake Recipe</h2> 
+		
+		<div style="border:5px solid #888888; width:450px;">
+		  <img title="Molten Lava Cake" src="lavacake.jpg" width="450"/><BR>
+		</div>
+    <span style="font: italic 10px verdana; color: #888888;">Image: <a href="http://www.flickr.com/photos/crd/2088405472/sizes/m/in/photostream/">crd!</a> via Flickr - licensed under <a href="http://creativecommons.org/licenses/by-sa/2.0/deed.en">CC BY-SA 2.0</a></span><BR>
+
+		<br />
+		
+		<form>
+			<input type="button" value="Cook" onclick="postCook()" />
+		</form>
+		
+		<table><tr><td valign=top>
+		<!-- to display recent timeline activity -->
+		<fb:activity actions="YOUR_NAMESPACE:cook"></fb:activity>
+	  </td><td valign=top>
+	  <!-- to ask for permission to post to timeline -->
+	  <fb:add-to-timeline></fb:add-to-timeline>		
+	  </td>
+	  </table>
+	</body> 
+</html>
